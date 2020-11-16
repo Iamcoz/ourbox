@@ -11,9 +11,8 @@ import ourbox.common.vo.MemberVO;
 @Repository("memberDao")
 public class MemberDaoImpl implements IMemberDao {
 
-	@Resource(name = "sqlSessionTemplate")
+	@Resource(name="sqlSessionTemplate")
 	public SqlSessionTemplate sqlSession;
-	
 	
 	/**
 	 * 회원ID,PASS에 해당하는 MemberVO객체를 반환하는 메서드
@@ -24,6 +23,17 @@ public class MemberDaoImpl implements IMemberDao {
 	public MemberVO loginMember(MemberVO member){
 		return sqlSession.selectOne("member.loginMember", member);
 	}
+	
+	/**
+	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
+	 * @param memId 세부내용을 볼 회원ID
+	 * @return boardNo에 해당하는 MemberVO 객체
+	 */
+	@Override
+	public MemberVO detailMember(String mem_id){
+		return sqlSession.selectOne("member.getMember", mem_id);
+	}
+	
 
 //	@Override
 //	public ManagerVO adminCheck(ManagerVO mv){
@@ -105,17 +115,7 @@ public class MemberDaoImpl implements IMemberDao {
 //		return memList;
 //	}
 //
-//	/**
-//	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
-//	 * @param memId 세부내용을 볼 회원ID
-//	 * @return boardNo에 해당하는 MemberVO 객체
-//	 */
-//	@Override
-//	public MemberVO detailMember(String mem_id) throws SQLException {
-//		MemberVO mv = null;
-//		mv = (MemberVO) smc.queryForObject("member.getMember",mem_id);
-//		return mv;
-//	}
+
 //
 //
 //

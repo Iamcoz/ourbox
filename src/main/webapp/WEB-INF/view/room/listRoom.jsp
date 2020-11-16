@@ -3,18 +3,8 @@
 <%@page import="ourbox.common.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%! 
-   		MemberVO mv; 
-		List<RoomVO> roomList;
-		RoomVO rv;
-	%>
-    <% 
-    	mv =  (MemberVO)session.getAttribute("vo"); 
-    	String mem_id = mv.getMem_id();
-    
-    	roomList = (List<RoomVO>)request.getAttribute("roomList");
-   	%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,31 +20,12 @@
 
 	$(function() {
 		
-			memId = "<%=mv.getMem_id()%>"
+			memId = "${sessionScope.vo.mem_id}";
 		
 		$('.panel-title').mousedown(function() {
 			event.stopPropagation()
 			//$('.contextmenu').show();
 			roomSeq = $(this).attr('roomSeq');
-		})
-		
-		$('#inviteMember').on('click', function() {
-			$('.contextmenu').hide();
-			
-			// 우클릭시 해당 그룹의 room_seq들고 보내야함
-			event.stopPropagation()
-			window.open("/ourbox/view/room/inviteForm.jsp?roomSeq="+roomSeq+"&memId="+memId, "회원초대", "width = 300, height = 350, top = 100, left = 200, location = no");
-
-		})
-		
-		$('#deleteGroup').on('click', function() {
-			
-			$('.contextmenu').hide();
-			
-			event.stopPropagation()
-			memId = "<%=mv.getMem_id()%>"
-			location.href="/ourbox/RoomDeleteController?roomSeq=" + roomSeq+"&memId="+memId;
-			parent.document.location.reload()// 새로고침
 		})
 	})
 	
@@ -91,30 +62,23 @@
 </head>
 <body>
 	<table>
-		<%
-			if(roomList !=null){ 
-				for(int i = 0; i< roomList.size(); i++){ 
-					rv = roomList.get(i);
-		%> 
-		<tr>
-			<td>
-			<a class = "panel-title" roomSeq="<%=rv.getRoom_seq()%>" href="/ourbox/view/ourbox/group.jsp?roomSeq=<%=rv.getRoom_seq()%>&memId=<%=mem_id %>" target="ifr">
-			<img alt="그룹아이콘.png" src="/ourbox/images/그룹아이콘.png">
-			<span class="bold"><%=rv.getRoom_name()%></span>
-			</a></td>
-		</tr>
-		
-		
-		<%
-				} 
-			}else{ 
-		%> 
-		<tr>
-			<td>생성한 그룹이 없습니다.</td>
-		</tr>
-		<%
-			} 
-		%> 
+	<c:choose>
+		<c:when test="${roomList!=null}">
+			<c:forEach items="${roomList }" var="room">
+				<tr>
+					<td>
+						<img alt="그룹아이콘.png" src="/ourbox/images/그룹아이콘.png">
+						<span class="bold">${room.room_name}</span>
+					</td>
+				</tr>
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td>생성한 그룹이 없습니다.</td>
+			</tr>
+		</c:otherwise>
+	</c:choose>
 		<tr>
 			<td></td>
 		</tr>

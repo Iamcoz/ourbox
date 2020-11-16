@@ -1,34 +1,19 @@
 package ourbox.member.service;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ourbox.common.vo.ManagerVO;
 import ourbox.common.vo.MemberVO;
 import ourbox.member.dao.IMemberDao;
 
 @Service("memberService")
 public class MemberServiceImpl implements IMemberService {
 
-	@Resource(name = "memberDao")
+	@Autowired
 	private IMemberDao memberDao;
-	
 	
 	public MemberServiceImpl() {
 		
-	}
-	
-	public IMemberDao getMemberDao() {
-		return memberDao;
-	}
-
-	public void setBoardRepository(IMemberDao memberDao) {
-		this.memberDao = memberDao;
-	}
-
-	public MemberServiceImpl(IMemberDao memberDao) {
-		this.memberDao = memberDao;
 	}
 	
 	/**
@@ -40,6 +25,17 @@ public class MemberServiceImpl implements IMemberService {
 	public MemberVO loginMember(MemberVO member){
 		return memberDao.loginMember(member);	
 	}
+	
+	/**
+	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
+	 * @param mem_id 세부내용을 볼 회원ID
+	 * @return boardNo에 해당하는 MemberVO 객체
+	 */
+	@Override
+	public MemberVO detailMember(String mem_id) {
+		return memberDao.detailMember(mem_id);
+	}
+	
 	
 //	@Override
 //	public ManagerVO adminCheck(ManagerVO mv) {
@@ -143,22 +139,7 @@ public class MemberServiceImpl implements IMemberService {
 //		return memList;
 //	}
 //
-//	/**
-//	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
-//	 * @param mem_id 세부내용을 볼 회원ID
-//	 * @return boardNo에 해당하는 MemberVO 객체
-//	 */
-//	@Override
-//	public MemberVO detailMember(String mem_id) {
-//		MemberVO mv = null;
-//		try {
-//			mv = memberDao.detailMember(mem_id);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return mv;
-//	}
+
 //	@Override
 //	public MemberVO findId(MemberVO mv) {
 //		MemberVO vo = null;

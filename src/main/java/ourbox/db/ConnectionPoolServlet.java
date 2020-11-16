@@ -24,7 +24,7 @@ public class ConnectionPoolServlet extends HttpServlet{
 		//커넥션 pool 생성
 		BasicDataSource bd = new BasicDataSource();
 		bd.setDriverClassName("oracle.jdbc.driver.OracleDriver"); 	//classforName
-		bd.setUrl("jdbc:oracle:thin:@localhost:1521/xe");		//oracle url
+		bd.setUrl("jdbc:log4jdbc:oracle:thin:@112.220.114.130:1521:xe");		//oracle url
 		bd.setUsername("team4_202005"); 	
 		bd.setPassword("java");
 		bd.setInitialSize(20); 	//커넥션 풀 만들 때 몇개의 커넥션풀로 지정해서 생성할건지

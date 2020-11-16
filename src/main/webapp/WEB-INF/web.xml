@@ -9,18 +9,19 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
+ 
   <!-- 스프링 부모 컨테이너 생성 : service, repository -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>
-  		ourbox.config.ourbox.RootContext
-  		ourbox.config.ourbox.AopContext
-  		ourbox.config.ourbox.DataSourceContext
-  		ourbox.config.ourbox.TransactionContext
+  		classpath:ourbox/config/spring/root-context.xml
+  		classpath:ourbox/config/spring/aop-context.xml
+  		classpath:ourbox/config/spring/datasource-context.xml
+  		classpath:ourbox/config/spring/transaction-context.xml
   	</param-value>
   </context-param>
- 
+  
+  
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -32,12 +33,13 @@
  	<init-param>
  		<param-name>contextConfigLocation</param-name>
  		<param-value>
- 			ourbox.config.ourbox.ApplicationContext
- 			ourbox.config.ourbox.InterceptorContext
+ 			classpath:ourbox/config/spring/application-context.xml
+ 			classpath:ourbox/config/spring/interceptor-context.xml 		
  		</param-value>
  	</init-param>
  	<load-on-startup>1</load-on-startup>
   </servlet>
+  
   <servlet-mapping>
   	<servlet-name>dispatcherServlet</servlet-name>
   	<url-pattern>/</url-pattern>

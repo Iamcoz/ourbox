@@ -1,72 +1,60 @@
 package ourbox.notice.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.ibatis.sqlmap.client.SqlMapClient;
+import javax.annotation.Resource;
 
-import ourbox.common.util.SqlMapClientFactory;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
 import ourbox.common.vo.NoticeVO;
 
+@Repository("noticeDao")
 public class NoticeDaoImpl implements INoticeDao {
 
-	private SqlMapClient smc;
 	
-	private static INoticeDao noticeDao;
-	
-	private NoticeDaoImpl() {
-		smc = SqlMapClientFactory.getInstance();
-	}
-	
-	public static INoticeDao getInstance() {
-		
-		if(noticeDao == null) {
-			noticeDao = new NoticeDaoImpl();
-		}
-		
-		return noticeDao;
-	}
-	
+	@Resource(name = "sqlSessionTemplate")
+	public SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeVO> noticeList() throws SQLException {
-		return smc.queryForList("notice.noticeList");
+	public List<NoticeVO> noticeList() {
+		return sqlSession.selectList("notice.noticeList");
 	}
 
 	@Override
-	public int insertNotice(NoticeVO notice) throws SQLException {
-		return (Integer) smc.insert("notice.insertNotice",notice);
+	public int insertNotice(NoticeVO notice) {
+		return sqlSession.insert("notice.insertNotice", notice);
 	}
 
 	@Override
-	public int updateNotice(NoticeVO notice) throws SQLException {
-		return smc.update("notice.updateNotice", notice);
+	public int updateNotice(NoticeVO notice) {
+		return sqlSession.update("notice.updateNotice", notice);
 	}
 
 	@Override
-	public int deleteNotice(int notice_seq) throws SQLException {
-		return smc.delete("notice.deleteNotice", notice_seq);
+	public int deleteNotice(int notice_seq) {
+		return sqlSession.delete("notice.deleteNotice", notice_seq);
 	}
 
 	@Override
-	public NoticeVO detailNotice(int notice_seq) throws SQLException {
-		return (NoticeVO) smc.queryForObject("notice.detailNotice", notice_seq);
+	public NoticeVO detailNotice(int notice_seq) {
+		return sqlSession.selectOne("notice.detailNotice", notice_seq);
 	}
 
 	@Override
-	public List<NoticeVO> searchNotice(NoticeVO notice) throws SQLException {
-		return smc.queryForList("notice.searchNotice", notice);
+	public List<NoticeVO> searchNotice(NoticeVO notice) {
+		return sqlSession.selectList("notice.searchNotice", notice);
 	}
 
 	@Override
-	public List<NoticeVO> selectPage(Map<String, Integer> map) throws SQLException {
-		return smc.queryForList("notice.selectPage", map);
+	public List<NoticeVO> selectPage(Map<String, Integer> map) {
+		return sqlSession.selectList("notice.selectPage", map);
 	}
 
 	@Override
-	public int getTotalCount() throws SQLException {
-		return (Integer) smc.queryForObject("notice.getTotalCount");
+	public int getTotalCount() {
+		return sqlSession.selectOne("notice.getTotalCount");
 	}
 
 }

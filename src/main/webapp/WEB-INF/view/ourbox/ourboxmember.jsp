@@ -3,17 +3,8 @@
 <%@page import="ourbox.common.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%! MemberVO mv; 
-		String msg;
-		List<RoomVO> roomList;
-		RoomVO rv;
-	%>
-    <% mv =  (MemberVO)session.getAttribute("vo");
-    	String mem_id = mv.getMem_id();
-    
-    	msg = (String)request.getAttribute("msg");
-    	roomList = (List<RoomVO>)request.getAttribute("roomList");
-    %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,61 +20,10 @@
 <title>ourbox</title>
 
 <script type="text/javascript">
-	$(function(){
-		if(<%=msg%> == "사용자 자신은 초대 할 수 없습니다."){
-			alert("사용자 자신은 초대 할 수 없습니다.");
-		}
-	})
-
-	$(function() {
-	
-		$('#alarmModal').on('click', function() {
-			
-			memId = $(this).attr("memId");
-			
-			alarmList(memId);		
-			
-		})
-		
-		
-		$('.modal-body').on('click', '.alarmDelete', function() {
-		
-			alarm_seq = $(this).attr('id');
-			
-			deleteAlarm(alarm_seq);
-			
-			$(this).parents('.alarmContent').remove();
-		
-			
-		})
-		
-		
-		$('#alarmAllDelete').on('click', function() {
-			
-			memId = $(this).attr("memId");
-			
-			deleteAllAlarm(memId);
-			
-			
-		})
-		
-		$('#groupadd').on('click',function(){
-			
-			window.open("<%=request.getContextPath()%>/view/room/insertRoomForm.jsp?memId=<%=mem_id%>", "그룹추가", "width = 450, height = 200, top = 100, left = 200, location = no");
-			
-		})
-		
-		
-		
-		
-	})
-	
 	function resizeIframe(obj) {
     	obj.style.height = '0px';
     	obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
   	}	
-	
-
 </script>
 
 <style type="text/css">
@@ -311,10 +251,9 @@
     	</div>
     	
     	<div id="navRight">
-    		<a id="alarmModal" memId="<%=mem_id%>" data-toggle="modal" data-target="#myModal"><img alt="알림이모티콘.png" src="/ourbox/images/알림이모티콘.png"></a>
+    		<a href="#"><img alt="알림이모티콘.png" src="/ourbox/images/알림이모티콘.png"></a>
     		
-    		<a href="/ourbox/MemoListController?memId=<%=mem_id%>" 
-    			onclick="window.open(this.href, '_blank', 'width=330px,height=420px'); return false;">
+    		<a href="#">
 			<img alt="퀵메모메뉴버튼.png" src="/ourbox/images/퀵메모메뉴버튼.png"></a>
     		
     		<a href="#" ><img alt="setting.png" src="/ourbox/images/setting.png"></a>
@@ -326,7 +265,7 @@
     <aside id="left">
 		 
 		<div id="memProfile">
-			<iframe src ="/ourbox/MemProfileController?memId=<%=mem_id%>" name="profile" id="profile"></iframe>
+			<iframe src ="${cp}/ourbox/memProfile?memId=${sessionScope.vo.mem_id }" name="profile" id="profile"></iframe>
 		</div>	
 
         <div id="leftMenu">
@@ -334,7 +273,7 @@
        		<a href="/ourbox/noticeList" target="ifr"><img alt="시작하기아이콘.png" src="/ourbox/images/시작하기아이콘.png"><span class="bold sizeUp">ourbox</span></a><br><br>
         	
         	<!-- mem_id 받아서 리스트서블렛으로 보냄 -->
-        	<iframe id="mygroup" src="<%=request.getContextPath()%>/RoomListController?memId=<%=mv.getMem_id() %>" target="group" name="mygroup" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe><br>
+        	<iframe id="mygroup" src="${cp }/ourbox/roomList?memId=${sessionScope.vo.mem_id }" target="group" name="mygroup" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe><br>
 			
         	<!-- 그룹추가버튼  -->
         	<span id="groupadd" class="bold sizeUp"> + GROUP 생성</span>
@@ -343,10 +282,10 @@
         
         <div id="leftBottom">
      	
-     		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ourbox/GargabegeListController?memId=<%=mem_id%>" target="ifr"><span class='bold' >휴지통</span></a><br>
-     		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ourbox/MemberQnaPageListController?memId=<%=mem_id%>" target="ifr"><span class='bold'>도움말 및 QnA</span></a>
+     		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ourbox/GargabegeListController?memId=${vo.mem_id} target="ifr"><span class='bold' >휴지통</span></a><br>
+     		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ourbox/MemberQnaPageListController?memId=${vo.mem_id}" target="ifr"><span class='bold'>도움말 및 QnA</span></a>
         	<br><br>
-	        <iframe src="<%=request.getContextPath()%>/DriveSizeController?memId=<%=mv.getMem_id() %>" name="capacity" id="capacity" >
+	        <iframe src="#" name="capacity" id="capacity" >
 	        
 	        
 	        </iframe>
@@ -359,7 +298,7 @@
     <section id="main">
         <article id="article1">
         
-        <iframe id="mainFrame" src="/ourbox/noticeList" name="ifr"> </iframe>
+        <iframe id="mainFrame" src="${cp }/ourbox/noticeList" name="ifr"> </iframe>
         
         </article>
         
@@ -414,7 +353,7 @@
         
         
         <div class="modal-footer">
-          <button id="alarmAllDelete" type="button" class="btn btn-default" memId="<%=mem_id%>">전체지우기</button>
+          <button id="alarmAllDelete" type="button" class="btn btn-default" memId="${vo.mem_id }">전체지우기</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
         </div>
       </div>

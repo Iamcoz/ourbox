@@ -1,14 +1,7 @@
 <%@page import="ourbox.common.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	MemberVO mv = (MemberVO) request.getAttribute("vo");
-	String msg = (String)request.getAttribute("msg"); // 로그인 성공시 null
-	if(msg==null){
-		msg = "";
-	}
-	session.invalidate();  // 세션초기화
-%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +17,7 @@
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script>
-  $(function(){
+/*   $(function(){
 	  //아이디 찾기
 	  $('#chk').on('click', function(){
 		  namechk = $('#name').val().trim();
@@ -119,13 +112,13 @@
   		
   		alert("비밀번호가 변경되었습니다.");
   	})
-  	if('<%=msg%>'=="아이디와 패스워드를 확인해주세요."){
+  	if('${msg}'=="아이디와 패스워드를 확인해주세요."){
   		alert("아이디와 패스워드를 확인해주세요.");
-  	}else if('<%=msg%>'=="탈퇴한 회원입니다."){
+  	}else if('${msg}'=="탈퇴한 회원입니다."){
   		alert("탈퇴한 회원입니다.");
   	}
  })
-  
+   */
 </script>
 
 <style>
@@ -305,8 +298,7 @@
 		<br>
 	
 		<div id="box">
-			<form id="login"  action="<%=request.getContextPath()%>/MemberLoginController" method ="post">
-			
+			<form id="login"  action="${cp }/ourbox/loginVali" method ="post">
 				<section id = "inputleft" style="width: 60%">
 					<label for = "id">아이디</label>
 					<label><input class="input" type="text" name="id" id="id" value=""></label><br>
@@ -318,7 +310,7 @@
 				</section>
 				<span id="find">
 					<a class="but" type="button" data-toggle="modal" data-target="#myModal">아이디/비밀번호 찾기</a>/
-				    <a href="<%=request.getContextPath()%>/MemberInsertController">회원가입</a><br><br>
+				    <a href="#">회원가입</a><br><br>
 				</span>
 				<div id="apilogin">
 					<a id="kakao-login-btn"></a><a href="http://developers.kakao.com/logout"></a>

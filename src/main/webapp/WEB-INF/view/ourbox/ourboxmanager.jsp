@@ -221,19 +221,17 @@
 		
         <div id="leftMenu">
 			
-       		<a href="<%=request.getContextPath()%>/MemberListServlet" target="ifr"><img alt="회원관리아이콘.png" src="/ourbox/images/회원관리아이콘.png"><span class="bold sizeUp">회원관리</span></a><br><br>
-        	<a href="<%=request.getContextPath()%>/PlanManagerList" target="ifr"><img alt="요금제관리 아이콘.png" src="/ourbox/images/요금제관리 아이콘.png"><span class="bold sizeUp">요금제관리</span></a><br><br>
-        	<a href="/ourbox/view/notice/noticeMain.html" target="ifr"><img alt="공지아이콘.png" src="/ourbox/images/공지아이콘.png"><span class="bold sizeUp">공지관리</span></a><br><br>
-        	<a href="/ourbox/view/qna/managerQnaMain.html" target="ifr"><img alt="관리자 Qna아이콘.png" src="/ourbox/images/관리자 Qna아이콘.png"><span class="bold sizeUp">QnA 게시판관리</span></a><br><br>
+       		<a href="#" target="ifr"><img alt="회원관리아이콘.png" src="/ourbox/images/회원관리아이콘.png"><span class="bold sizeUp">회원관리</span></a><br><br>
+        	<a href="#" target="ifr"><img alt="요금제관리 아이콘.png" src="/ourbox/images/요금제관리 아이콘.png"><span class="bold sizeUp">요금제관리</span></a><br><br>
+        	<a href="${cp }/ourbox/noticePageList" target="ifr"><img alt="공지아이콘.png" src="/ourbox/images/공지아이콘.png"><span class="bold sizeUp">공지관리</span></a><br><br>
+        	<a href="#" target="ifr"><img alt="관리자 Qna아이콘.png" src="/ourbox/images/관리자 Qna아이콘.png"><span class="bold sizeUp">QnA 게시판관리</span></a><br><br>
         </div>
     </aside>
    
    
     <section id="main">
         <article id="article1">
-        
-        <iframe id="mainFrame" src="<%=request.getContextPath()%>/MemberListServlet" name="ifr"> </iframe>
-        
+        	<iframe id="mainFrame" src="${cp}/ourbox/" name="ifr"> </iframe>
         </article>
         
         

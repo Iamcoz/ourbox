@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="ourbox.common.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="ourbox.common.vo.RoomVO" alias="RoomVO"/>
+		<typeAlias type="ourbox.common.vo.NoticeVO" alias="NoticeVO"/>
+	</typeAliases>
+
+  <mappers>
+    <mapper resource="ourbox/config/db/mapper/member.xml"/>
+    <mapper resource="ourbox/config/db/mapper/room.xml"/>
+    <mapper resource="ourbox/config/db/mapper/notice.xml"/>
+  </mappers>
+</configuration>

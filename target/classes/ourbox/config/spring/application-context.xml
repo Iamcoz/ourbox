@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- kr.or.ddit 패키지 하위의 클래스중 @Service, @Repository 어노테이션이 붙은 클래스를 스캔하여 스플이 빈으로 ㅅ생성 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+
+	
+	<!-- ourbox 패키지 하위의 클래스중 @Controller 어노테이션이 붙은 클래스를 스캔하여 스프링 빈으로 생성 -->
+	<context:component-scan base-package="ourbox" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.method.ControllerAdviceBean"/>
+	</context:component-scan>
+	
+<!-- 	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"></bean>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"></property>
+	</bean>
+	 -->
+<!-- 	
+	<bean id="excelView" class="kr.or.ddit.mvc.view.ExcelDownloadView"></bean>
+	<bean id="downloadView" class="kr.or.ddit.mvc.view.DownloadView"></bean>
+	<bean id="profileImgView" class="kr.or.ddit.mvc.view.ProfileImgView"></bean>
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	-->
+   	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+      <property name="order" value="1"></property>
+   	</bean>
+	
+	<!-- tile view resolver 추가
+		1. tiles 설정 작업 ==> TilesConfigurer를 통해 설정
+		2. tiles view resolver 등록 -->
+<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:ourbox/config/tiles/tiles-definition.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+ 	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+	      <property name="order" value="0"></property>
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- prefix(접두어) : 사전의, 고정된 / suffix : 접미어 
+			Controller가 return하는 문자열에 prefix, suffix를 적용하여
+			해당 경로의 파일로 응답을 생성
+			
+			LoginController.getView() ==> "login/view"
+			
+				  prefix		  viewName	   suffix
+			"/WEB-INF/views/" + "login/view" + ".jsp"
+			"/WEB-INF/views/login/view.jsp"
+		-->
+		<property name="order" value="2"></property>
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!-- @Controller, @RequestMapping,
+		HandlerMapping, HandlerAdappter,
+		formatting conversion service emd, validation
+		spring mvc패턴에 필요한 어노테이션, 엘레멘트 처리 -->
+	<mvc:annotation-driven/>
+	
+	<!-- dafault servlet에 대한 처리 -->
+	<!-- server에 등록된 default servlet에게 위임 -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 파일 업로드 처리를 위한 multipartResolver 설정 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+	
+	<!-- 에러 페이지 설정 -->
+	<!-- 정적자원 매핑 처리 
+		1. url단축을 목적
+		2. WEB-INF : 외부에서 접근불가능한 공간에 저장된 자원ㄷ늘 접근 매핑	-->
+		<!-- localhost/resources/** -->
+		<mvc:resources mapping="/resources/**" location="/WEB-INF/view/error/"/>
+		
+		<!-- locale Resolver -->
+		<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+		
+		<!-- locale 변경 감지 interceptor -->
+		<mvc:interceptors>
+			<mvc:interceptor>
+				<mvc:mapping path="/**"/>
+				<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+					<property name="paramName" value="lang"></property>
+				</bean>
+			</mvc:interceptor>
+		</mvc:interceptors>
+</beans>

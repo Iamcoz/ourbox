@@ -1,6 +1,5 @@
 package ourbox.member.dao;
 
-import ourbox.common.vo.ManagerVO;
 import ourbox.common.vo.MemberVO;
 
 public interface IMemberDao {
@@ -12,6 +11,13 @@ public interface IMemberDao {
 	 * @return mem_id,mem_pass에 해당하는 MemberVO 객체
 	 */
 	public MemberVO loginMember(MemberVO mv);
+	
+	/**
+	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
+	 * @param mem_id 세부내용을 볼 회원ID
+	 * @return mem_id 에 해당하는 MemberVO 객체
+	 */
+	public MemberVO detailMember(String mem_id);
 	
 //	/**
 //	 * 로그인 시 관리자를 구분하기 위한 메서드
@@ -62,12 +68,7 @@ public interface IMemberDao {
 //	 */
 //	public List<MemberVO> getMemberForPlanSeq(PlanVO plan) throws SQLException;
 //	
-//	/**
-//	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
-//	 * @param mem_id 세부내용을 볼 회원ID
-//	 * @return mem_id 에 해당하는 MemberVO 객체
-//	 */
-//	public MemberVO detailMember(String mem_id) throws SQLException;
+
 //	/**
 //	 * 아이디 찾기 메서드
 //	 * @param mv

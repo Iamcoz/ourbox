@@ -1,134 +1,62 @@
 package ourbox.notice.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import ourbox.common.vo.NoticeVO;
 import ourbox.notice.dao.INoticeDao;
-import ourbox.notice.dao.NoticeDaoImpl;
 
+@Service("noticeService")
 public class NoticeServiceImpl implements INoticeService {
 
-	private static INoticeService noticeService;
-	
+	@Resource(name = "noticeDao")
 	private INoticeDao noticeDao;
-	
-	private NoticeServiceImpl() {
-		noticeDao = NoticeDaoImpl.getInstance();
+
+	public NoticeServiceImpl() {
+
 	}
-	
-	public static INoticeService getInstance() {
-		
-		if(noticeService == null) {
-			noticeService = new NoticeServiceImpl();
-		}
-		return noticeService;
-	}
-	
+
 	@Override
 	public List<NoticeVO> noticeList() {
-		List<NoticeVO> noticeList = null;
-		
-		try {
-			noticeList = noticeDao.noticeList();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return noticeList;
+		return noticeDao.noticeList();
 	}
 
 	@Override
 	public int insertNotice(NoticeVO notice) {
-		int count = 0;
-		
-		try {
-			count = noticeDao.insertNotice(notice);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
+		return noticeDao.insertNotice(notice);
 	}
 
 	@Override
 	public int updateNotice(NoticeVO notice) {
-		int count = 0;
-		
-		try {
-			count = noticeDao.updateNotice(notice);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
+		return noticeDao.updateNotice(notice);
 	}
 
 	@Override
 	public int deleteNotice(int notice_seq) {
-		int count = 0;
-		
-		try {
-			count = noticeDao.deleteNotice(notice_seq);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
+		return noticeDao.deleteNotice(notice_seq);
 	}
 
 	@Override
 	public NoticeVO detailNotice(int notice_seq) {
-		NoticeVO detailNotice = null;
-		
-		try {
-			detailNotice = noticeDao.detailNotice(notice_seq);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return detailNotice;
+		return noticeDao.detailNotice(notice_seq);
 	}
 
 	@Override
 	public List<NoticeVO> searchNotice(NoticeVO notice) {
-		List<NoticeVO> noticeList = null;
-		
-		try {
-			noticeList = noticeDao.searchNotice(notice);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return noticeList;
+		return noticeDao.searchNotice(notice);
 	}
 
 	@Override
 	public List<NoticeVO> selectPage(Map<String, Integer> map) {
-
-		List<NoticeVO> selectPage = null;
-		
-		try {
-			selectPage = noticeDao.selectPage(map);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return selectPage;
+		return noticeDao.selectPage(map);
 	}
 
 	@Override
 	public int getTotalCount() {
-		int count = 0;
-		
-		try {
-			count = noticeDao.getTotalCount();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return count;
+		return noticeDao.getTotalCount();
 	}
-
 }

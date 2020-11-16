@@ -19,19 +19,26 @@ public class MemberLoginController {
    private static final Logger logger = LoggerFactory.getLogger(MemberLoginController.class);
 
    @Autowired
-   private IMemberService memService;
+   private IMemberService memberService;
    
    @RequestMapping(path="/login")
-	public String login(String id, String pw, HttpSession session, Model model) {
+   public String login() {
+	   return "main/login";
+   }
+
+   @RequestMapping(path="/loginVali")
+	public String login(String id, String pass, HttpSession session, Model model) {
 	   
-	   if(id.equals("ourbox")&&pw.equals("ourbox")||id.equals("ㅐㅕ규ㅐㅌ")&&pw.equals("ㅐㅕ규ㅐㅌ")) {
+	   if(id.equals("ourbox")&&pass.equals("ourbox")||id.equals("ㅐㅕ규ㅐㅌ")&&pass.equals("ㅐㅕ규ㅐㅌ")) {
+		   logger.debug("id : {}", id);
+		   logger.debug("pass : {}", pass);
+		   
 		   return "ourbox/ourboxmanager";   
 	   }else {
-		   MemberVO mv = new MemberVO(id, pw);
-		   MemberVO vo = memService.loginMember(mv);	//로그인 성공한 멤버 객체
+		   MemberVO mv = new MemberVO(id, pass);
+		   MemberVO vo = memberService.loginMember(mv);	//로그인 성공한 멤버 객체
 
-		   logger.debug("vo : {}", vo);
-		   if (vo != null && vo.getMem_pass().equals(pw)) { // 올바르게 로그인
+		   if (vo != null && vo.getMem_pass().equals(pass)) { // 올바르게 로그인
 			   session.setAttribute("vo", vo); 	// session에 로그인값을 담는다.
 			   return "ourbox/ourboxmember";
 			   
@@ -45,4 +52,15 @@ public class MemberLoginController {
 			}
 	   }
 	}
+   
+   @RequestMapping(path = "/memProfile")
+	public String memProfile(String memId, Model model) {
+	   logger.debug("memId : {}", memId);
+	   MemberVO member = memberService.detailMember(memId);
+	   model.addAttribute("member", member);
+		
+	   return "ourbox/ourboxmember";
+	}
+   
+   
 }

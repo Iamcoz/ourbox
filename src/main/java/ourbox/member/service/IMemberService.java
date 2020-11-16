@@ -1,6 +1,5 @@
 package ourbox.member.service;
 
-import ourbox.common.vo.ManagerVO;
 import ourbox.common.vo.MemberVO;
 
 public interface IMemberService {
@@ -61,12 +60,12 @@ public interface IMemberService {
 //	 */
 //	public List<MemberVO> getMemberForPlanSeq(PlanVO plan);
 //	
-//	/**
-//	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
-//	 * @param mem_id 세부내용을 볼 회원ID
-//	 * @return boardNo에 해당하는 MemberVO 객체
-//	 */
-//	public MemberVO detailMember(String mem_id);
+	/**
+	 * 회원ID에 해당하는 MemberVO객체를 반환하는 메서드
+	 * @param mem_id 세부내용을 볼 회원ID
+	 * @return boardNo에 해당하는 MemberVO 객체
+	 */
+	public MemberVO detailMember(String mem_id);
 //	/**
 //	 * 아이디 찾기를 위한 메서드
 //	 * @param mv
