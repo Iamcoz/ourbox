@@ -46,11 +46,6 @@ public class NoticeServiceImpl implements INoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> searchNotice(NoticeVO notice) {
-		return noticeDao.searchNotice(notice);
-	}
-
-	@Override
 	public List<NoticeVO> selectPage(Map<String, Integer> map) {
 		return noticeDao.selectPage(map);
 	}

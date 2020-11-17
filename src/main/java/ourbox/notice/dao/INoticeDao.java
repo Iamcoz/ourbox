@@ -41,13 +41,6 @@ public interface INoticeDao {
 	 */
 	public NoticeVO detailNotice(int notice_seq);
 	
-	/**
-	 * NoticeVO에 담긴 자료를 이용하여 공지사항을 검색하는 메서드
-	 * @param notice 검색할 자료가 들어있는 NoticeVO 객체
-	 * @return 검색된 NoticeVO객체를 담은 List객체
-	 */
-	public List<NoticeVO> searchNotice(NoticeVO notice);
-	
 
 	/**
 	 * 페이지별 리스트 가져오기

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/ourbox/css/public.css">
 
-<script src="/ourbox/js/jquery-3.5.1.min.js"></script>
-
+<link rel="stylesheet" href="/css/public.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -191,17 +191,17 @@
    
     <nav>
     	<div id="navLeft">
-    		<a href="/ourbox/view/ourbox/ourboxmanager.jsp"><img alt="ourbox.png" src="/ourbox/images/ourbox_logo.png"></a>
+    		<a href="/ourbox/view/ourbox/ourboxmanager.jsp"><img alt="ourbox.png" src="/images/ourbox_logo.png"></a>
     	</div>
     	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     	<div id="navMid">
     		<input type="text">
-    		<button><img alt="돋보기.png" src="/ourbox/images/돋보기.png"></button>
+    		<button><img alt="돋보기.png" src="/images/돋보기.png"></button>
     	</div>
     	<div id="navRight">
-    		<a href="#" ><img alt="알림이모티콘.png" src="/ourbox/images/알림이모티콘.png"></a>
-    		<a href="#" ><img alt="퀵메모메뉴버튼.png" src="/ourbox/images/퀵메모메뉴버튼.png"></a>
-    		<a href="#" ><img alt="톱니.png" src="/ourbox/images/톱니.png"></a>
+    		<a href="#" ><img alt="알림이모티콘.png" src="/images/알림이모티콘.png"></a>
+    		<a href="#" ><img alt="퀵메모메뉴버튼.png" src="/images/퀵메모메뉴버튼.png"></a>
+    		<a href="#" ><img alt="톱니.png" src="/images/톱니.png"></a>
     	</div>
     
     </nav>
@@ -210,7 +210,7 @@
 		
 		<div id="memProfile">
 		
-		<img src="/ourbox/images/관리자 프로필사진.png" class="img-circle" alt="관리자 프사" width="70" height="70"> 
+		<img src="/images/관리자 프로필사진.png" class="img-circle" alt="관리자 프사" width="70" height="70"> 
 		<br>
 		관리자 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<button id = "logout"type="button" class="btn btn-default btn-xs">logout</button>
@@ -221,17 +221,17 @@
 		
         <div id="leftMenu">
 			
-       		<a href="#" target="ifr"><img alt="회원관리아이콘.png" src="/ourbox/images/회원관리아이콘.png"><span class="bold sizeUp">회원관리</span></a><br><br>
-        	<a href="#" target="ifr"><img alt="요금제관리 아이콘.png" src="/ourbox/images/요금제관리 아이콘.png"><span class="bold sizeUp">요금제관리</span></a><br><br>
-        	<a href="${cp }/ourbox/noticePageList" target="ifr"><img alt="공지아이콘.png" src="/ourbox/images/공지아이콘.png"><span class="bold sizeUp">공지관리</span></a><br><br>
-        	<a href="#" target="ifr"><img alt="관리자 Qna아이콘.png" src="/ourbox/images/관리자 Qna아이콘.png"><span class="bold sizeUp">QnA 게시판관리</span></a><br><br>
+       		<a href="#" target="ifr"><img alt="회원관리아이콘.png" src="/images/회원관리아이콘.png"><span class="bold sizeUp">회원관리</span></a><br><br>
+        	<a href="#" target="ifr"><img alt="요금제관리 아이콘.png" src="/images/요금제관리 아이콘.png"><span class="bold sizeUp">요금제관리</span></a><br><br>
+        	<a href="/ourbox/noticePageList?page=1" target="ifr"><img alt="공지아이콘.png" src="/images/공지아이콘.png"><span class="bold sizeUp">공지관리</span></a><br><br>
+        	<a href="#" target="ifr"><img alt="관리자 Qna아이콘.png" src="/images/관리자 Qna아이콘.png"><span class="bold sizeUp">QnA 게시판관리</span></a><br><br>
         </div>
     </aside>
    
    
     <section id="main">
         <article id="article1">
-        	<iframe id="mainFrame" src="${cp}/ourbox/" name="ifr"> </iframe>
+        	<iframe id="mainFrame" src="${cp}/ourbox/noticePageList?page=1" name="ifr"> </iframe>
         </article>
         
         

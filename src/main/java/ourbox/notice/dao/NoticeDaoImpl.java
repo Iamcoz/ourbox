@@ -43,11 +43,6 @@ public class NoticeDaoImpl implements INoticeDao {
 	}
 
 	@Override
-	public List<NoticeVO> searchNotice(NoticeVO notice) {
-		return sqlSession.selectList("notice.searchNotice", notice);
-	}
-
-	@Override
 	public List<NoticeVO> selectPage(Map<String, Integer> map) {
 		return sqlSession.selectList("notice.selectPage", map);
 	}

@@ -16,110 +16,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<script>
-/*   $(function(){
-	  //아이디 찾기
-	  $('#chk').on('click', function(){
-		  namechk = $('#name').val().trim();
-		  telchk = $('#tel').val().trim();
-		 	 $.ajax({
-				  url : '/ourbox/SearchId',
-				  type : 'post',
-				  data : { "name" : namechk,
-					  "tel" : telchk},
-					  success : function(res){
-						  code = res.id;
-						  $('#result1').html(code).css('color','red');
-					  },
-					  dataType : 'json'
-			  		})
-  			})
-  			
-  	
-  	//비밀번호 찾기
-  	$('#pwchk').on('click', function(){
-		  emailchk = $('#email').val();
-		  namechk = $('#name2').val();
-		  telchk = $('#tel2').val();
-	  $.ajax({
-		  url : '/ourbox/SearchPw',
-		  type : 'post',
-		  data : { 
-			  "email" : emailchk,
-			  "name" : namechk,
-			  "tel" : telchk},
-			  success : function(res){
-				  code = res.pw;
-				  $('#result2').html(code).css('color','red');
-			  },
-			  dataType : 'json'
-	  		})
-  	})
-  	
-  	$('#myModal').on('hide.bs.modal', function(){
-  		
-  		$('#result1').empty();
-  		$('#result2').empty();
-  		$('#name').val("");
-  		$('#tel').val("");
-  		$('#email').val("");
-  		$('#name2').val("");
-  		$('#tel2').val("");
-  		
-  	})
-  	
-  //새비밀번호 변경시 불일치 시 경고
-	$("#alert-success").hide();
-	$("#alert-danger").hide();
-	$("input").keyup(function(){
-		var pwd1=$("#newpw").val();
-		var pwd2=$("#newpwchk").val();
-		if(pwd1 != "" || pwd2 != ""){
-			if(pwd1 == pwd2){
-				$("#alert-success").show();
-				$("#alert-danger").hide();
-				$("#changepw2").removeAttr("disabled");
-			}else{
-				$("#alert-success").hide(); 
-				$("#alert-danger").show(); 
-				$("#changepw2").attr("disabled", "disabled");
-			} 
-		}
-	});
-	
-  	
-  //비밀번호변경
-  	$('#changepw2').on('click', function(){
-  		email2 = $('#email').val();
-  		newpwchk = $('#newpw').val();
-// 		newpwchk = $('#newpwchk').val();
-  		
-  	  $.ajax({
-		  url : '/ourbox/MemberUpdatePw',
-		  type : 'post',
-		  data : { 
-			  "email2" : email2,
-			  "newpw" : newpwchk},
-			  success : function(res){
-				  
-				  alert(res.sw);
-				  
-			  },
-			  dataType : 'json'
-	  		})
-  	})
-  	$('#changepw2').on('click', function(){
-  		
-  		alert("비밀번호가 변경되었습니다.");
-  	})
-  	if('${msg}'=="아이디와 패스워드를 확인해주세요."){
-  		alert("아이디와 패스워드를 확인해주세요.");
-  	}else if('${msg}'=="탈퇴한 회원입니다."){
-  		alert("탈퇴한 회원입니다.");
-  	}
- })
-   */
-</script>
 
 <style>
 	
@@ -292,7 +188,7 @@
 	<section id = "right" style="margin-top: 250px;">
 	
 		<div style="margin-left: 210px;">
-			<img id = "logo" src="/ourbox/images/ourbox_logo.png">
+			<img id = "logo" src="/images/ourbox_logo.png">
 		</div>
 		<br>
 		<br>
